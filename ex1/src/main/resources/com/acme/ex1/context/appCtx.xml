@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="warnerDao" class="com.acme.ex1.domain.dao.xml.WarnerMovieDaoImpl"
+		scope="singleton">
+		<constructor-arg value="c:/formation/files/warner.txt" />
+	</bean>
+
+	<bean id="foxDao" class="com.acme.ex1.domain.dao.xml.FoxMovieDaoImpl"
+		scope="singleton">
+		<constructor-arg value="c:/formation/files/fox.txt" />
+	</bean>
+
+	<bean id="movieService" class="com.acme.ex1.domain.service.xml.MovieServiceImpl"
+		scope="singleton">
+		<constructor-arg ref="foxDao" />
+	</bean>
+
+	<bean id="superMovieService" class="com.acme.ex1.domain.service.xml.SuperMovieServiceImpl" scope="singleton">
+		<constructor-arg>
+			<list>
+				<ref bean="foxDao" />
+				<ref bean="warnerDao" />
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

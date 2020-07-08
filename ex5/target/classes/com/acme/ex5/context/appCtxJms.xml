@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- socle technique : connection factory, 2 destinations, un jms template -->
+	<bean id="connFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg name="connectionFactory" ref="connFactory" />
+	</bean>
+
+	<bean id="myReqDest" class="org.apache.activemq.command.ActiveMQTopic"
+		c:name="myReqDest" />
+
+	<bean id="myRespDest" class="org.apache.activemq.command.ActiveMQQueue"
+		c:name="myRespDest" />
+
+	<!--
+	configuration mixte : bean déclaré en xml mais injections par annotations 
+	<bean class="com.acme.ex5.messaging.AsyncClient"/>
+	<context:annotation-config/>
+	 -->
+	
+	<!-- 
+	configuration 100% annotations, seuls les objets que l'on ne peut pas annoter
+	sont déclarés en xml
+	  -->
+	<context:component-scan base-package="com.acme.ex5"/>
+	
+	<!-- liaison entre connFactory, myReqDest, et server -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connFactory"/>
+		<property name="destination" ref="myReqDest"/>
+		<property name="messageListener" ref="server"/>
+	</bean>
+	
+	<!-- liaison entre connFactory, myReqDest, et server2 -->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connFactory"/>
+		<property name="destination" ref="myReqDest"/>
+		<property name="messageListener" ref="server2"/>
+	</bean>
+
+	<!-- liaison entre connFactory, myRespDest, et asyncClient -->	
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connFactory"/>
+		<property name="destination" ref="myRespDest"/>
+		<property name="messageListener" ref="asyncClient"/>
+	</bean>	
+
+</beans>

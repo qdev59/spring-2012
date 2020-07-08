@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<import resource="classpath:com/acme/appCtxBroker.xml" />
+
+	<bean id="commandProcessorEndpoint"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="commandProcessor" />
+		<property name="serviceInterface" value="com.acme.common.broker.CommandProcessor" />
+	</bean>
+
+
+	<security:http pattern="/commandProcessorEndpoint">
+		<security:http-basic />
+	</security:http>
+
+	<security:http security="none" pattern="/rest/**" />
+
+	<security:http security="none" pattern="/log*.jsp" />
+
+	<security:http auto-config="true">
+		<security:form-login login-page='/login.jsp' />
+		<security:logout logout-success-url="/logout.jsp" />
+		<security:intercept-url pattern="/**"
+			access="ROLE_1, ROLE_2" />
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="jdoe" password="xyz" authorities="ROLE_1, ROLE_2" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- System.out appender. -->
+	<appender name="ConsoleAppender"
+		class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{HH:mm:ss,SSS} | %p | %c | %L | %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Log messages to single file -->
+	<appender name="FileAppender"
+		class="org.apache.log4j.FileAppender">
+		<param name="File" value="d:/log_java.txt" />
+		<param name="Append" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{HH:mm:ss} | %0p | %c{1}:%L | %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Log messages to daily file -->
+	<appender name="DailyRollingFileAppender"
+		class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="d:/log_java.txt" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{HH:mm:ss} | %5p | %c{1}:%L | %m%n" />
+		</layout>
+	</appender>
+
+	<!-- Loggers -->
+	<logger name="com.acme" additivity="true">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="org.hibernate.SQL" additivity="true">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="org.hibernate.impl.SessionImpl" additivity="true">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="org.springframework.jmx" additivity="true">
+		<level value="debug"/>
+	</logger>
+	<logger name="org.springframework.orm" additivity="true">
+		<level value="debug" />
+	</logger>
+	<!-- Root logger. Sends all debug-and-up messages to console. (this tag must be declared after the loggers !) -->
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="ConsoleAppender" />
+	</root>
+</log4j:configuration>

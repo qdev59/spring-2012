@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<bean id="parentDao"
+		class="com.acme.ex2.domain.persistence.impl.FileTranslationDaoImpl"
+		c:folder="c:/formation/files/" abstract="true" />
+
+	<bean id="enFrDao" parent="parentDao" c:filename="en-fr.txt" />
+	<bean id="enSpDao" parent="parentDao" c:filename="en-sp.txt" />
+	<bean id="frSpDao" parent="parentDao" c:filename="fr-sp.txt" />
+
+</beans>

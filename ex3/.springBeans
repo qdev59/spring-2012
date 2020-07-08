@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.1.0.201210040510-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/resources/com/acme/ex3a/appCtxConfig.xml</config>
+		<config>src/main/resources/com/acme/ex3a/appCtxMain.xml</config>
+		<config>src/main/resources/com/acme/ex3a/appCtx.xml</config>
+		<config>src/main/resources/com/acme/appCtxBroker.xml</config>
+	</configs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+
+<!--  
+	<entity class="com.acme.ex3a.domain.entity.BusinessDomain">
+		<attributes>
+			<id name="id">
+				<column name="ID_BUSINESS_DOMAIN" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="Name" />
+		</attributes>
+	</entity>
+	<entity class="com.acme.ex3a.domain.entity.CandidateStatus">
+		<attributes>
+			<id name="id">
+				<column name="ID_CANDIDATE_STATUS" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="Name" />
+		</attributes>
+	</entity>
+	<entity class="com.acme.ex3a.domain.entity.Contract">
+		<attributes>
+			<id name="id">
+				<column name="ID_CONTRACT" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="Name" />
+		</attributes>
+	</entity>
+	<entity class="com.acme.ex3a.domain.entity.Country">
+		<attributes>
+			<id name="id">
+				<column name="ID_COUNTRY" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="Name" />
+		</attributes>
+	</entity>
+	<entity class="com.acme.ex3a.domain.entity.SkillLevel">
+		<attributes>
+			<id name="id">
+				<column name="ID_SKILL_LEVEL" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="Name" />
+		</attributes>
+	</entity>
+	<entity class="com.acme.ex3a.domain.entity.TechnicalDomain">
+		<attributes>
+			<id name="id">
+				<column name="ID_TECHNICAL_DOMAIN" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+			<basic name="Name" />
+		</attributes>
+	</entity>
+	<entity class="com.acme.ex3a.domain.entity.AbstractHumanResource">
+		<inheritance strategy="JOINED" />
+		<attributes>
+			<id name="id">
+				<column name="ID_RESOURCE" />
+				<generated-value strategy="IDENTITY" />
+			</id>
+
+			<many-to-many name="businessSkills">
+				<map-key-column name="ID_BUSINESS_DOMAIN" />
+				<join-table>
+					<join-column name="ID_RESOURCE" />
+					<inverse-join-column name="ID_SKILL_LEVEL" />
+				</join-table>
+			</many-to-many>
+			<many-to-many name="technicalSkills">
+				<map-key-column name="ID_TECHNICAL_DOMAIN" />
+				<join-table>
+					<join-column name="ID_RESOURCE" />
+					<inverse-join-column name="ID_SKILL_LEVEL" />
+				</join-table>
+			</many-to-many>
+			<embedded name="identity"/>
+		</attributes>
+
+	</entity>
+ -->
+</entity-mappings>

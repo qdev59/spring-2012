@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- service layer -->
+	<bean id="commandProcessor" class="com.acme.ex2.domain.service.impl.CommandProcessorImpl">
+		<constructor-arg ref="locator"/>
+	</bean>
+
+
+	<!-- business layer -->
+	<bean id="locator"
+		class="com.acme.ex2.domain.business.impl.InterpreterLocatorImpl">
+		<constructor-arg>
+			<map>
+				<entry key="en-fr" value-ref="enFrInterpreter" />
+				<entry key="fr-sp" value-ref="frSpInterpreter" />
+				<entry key="en-sp" value-ref="enSpInterpreter" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<bean id="enFrInterpreter"
+		class="com.acme.ex2.domain.business.impl.EnglishToFrenchInterpreterImpl"
+		c:dao-ref="enFrDao" />
+	<bean id="enSpInterpreter"
+		class="com.acme.ex2.domain.business.impl.EnglishToSpanishInterpreterImpl"
+		c:dao-ref="enSpDao" />
+	<bean id="frSpInterpreter"
+		class="com.acme.ex2.domain.business.impl.FrenchToSpanishInterpreterImpl">
+		<constructor-arg ref="frSpDao" />
+	</bean>
+
+
+</beans>

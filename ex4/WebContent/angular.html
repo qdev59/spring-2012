@@ -1,0 +1,36 @@
+<html ng-app>
+<head>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+</head>
+<body>
+	<div ng-controller="Main">
+		<form>
+			<input type="text" ng-model="f.name" /> <input type="text"
+				ng-model="f.managerId" /> <input type="button" ng-click="find(f)" />
+		</form>
+
+		<hr />
+		<table>
+			<tr ng-repeat="c in results">
+				<td>{{c.identity.lastname}}</td>
+				<td>{{c.identity.lastname}}</td>
+			</tr>
+		</table>
+
+	</div>
+
+</body>
+
+<script type="text/javascript">
+	function Main($scope, $http) {
+		$scope.find = function(filter) {
+			console.debug(filter);
+			$http.get("http://localhost:8080/ex4/rest/candidates", filter)
+					.success(function(response) {
+						$scope.results = response;
+					});
+		}
+	}
+</script>
+</html>
